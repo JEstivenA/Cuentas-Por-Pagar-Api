@@ -13,8 +13,12 @@
         "packagesPath": "C:\\Users\\estiv\\.nuget\\packages\\",
         "outputPath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\estiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

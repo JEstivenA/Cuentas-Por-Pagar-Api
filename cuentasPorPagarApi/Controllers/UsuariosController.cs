@@ -10,49 +10,50 @@ using cuentasPorPagarApi.Entities;
 
 namespace cuentasPorPagarApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Usuario")]
     [ApiController]
-    public class FacturasController : ControllerBase
+    public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public FacturasController(AppDbContext context)
+        public UsuariosController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Facturas
+        // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Factura>>> GetFacturas()
+        [Route("GET")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
-            return await _context.Facturas.ToListAsync();
+            return await _context.Usuarios.ToListAsync();
         }
 
-        // GET: api/Facturas/5
+        // GET: api/Usuarios/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Factura>> GetFactura(int id)
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-            var factura = await _context.Facturas.FindAsync(id);
+            var usuario = await _context.Usuarios.FindAsync(id);
 
-            if (factura == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return factura;
+            return usuario;
         }
 
-        // PUT: api/Facturas/5
+        // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFactura(int id, Factura factura)
+        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != factura.FacturaId)
+            if (id != usuario.usuarioId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(factura).State = EntityState.Modified;
+            _context.Entry(usuario).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +61,7 @@ namespace cuentasPorPagarApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FacturaExists(id))
+                if (!UsuarioExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +74,37 @@ namespace cuentasPorPagarApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Facturas
+        // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Factura>> PostFactura(Factura factura)
+        [Route("Post")]
+        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
-            _context.Facturas.Add(factura);
+            _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFactura", new { id = factura.FacturaId }, factura);
+            return CreatedAtAction("GetUsuario", new { id = usuario.usuarioId }, usuario);
         }
 
-        // DELETE: api/Facturas/5
+        // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFactura(int id)
+        public async Task<IActionResult> DeleteUsuario(int id)
         {
-            var factura = await _context.Facturas.FindAsync(id);
-            if (factura == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            _context.Facturas.Remove(factura);
+            _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool FacturaExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.Facturas.Any(e => e.FacturaId == id);
+            return _context.Usuarios.Any(e => e.usuarioId == id);
         }
     }
 }

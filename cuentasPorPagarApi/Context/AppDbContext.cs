@@ -13,6 +13,7 @@ namespace cuentasPorPagarApi.Context
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<MovimientosDeCuentas> MovimientosDeCuentas { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
     }
 }

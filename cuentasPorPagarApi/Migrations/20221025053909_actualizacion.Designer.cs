@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cuentasPorPagarApi.Context;
 
@@ -10,9 +11,10 @@ using cuentasPorPagarApi.Context;
 namespace cuentasPorPagarApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221025053909_actualizacion")]
+    partial class actualizacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,14 +31,11 @@ namespace cuentasPorPagarApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"), 1L, 1);
 
-                    b.Property<int>("NoFactura")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProveedorId")
                         .HasColumnType("int");
 
-                    b.Property<float>("TotalFactura")
-                        .HasColumnType("real");
+                    b.Property<int>("TotalFactura")
+                        .HasColumnType("int");
 
                     b.HasKey("FacturaId");
 
@@ -89,27 +88,6 @@ namespace cuentasPorPagarApi.Migrations
                     b.HasKey("IdProveedor");
 
                     b.ToTable("Proveedores");
-                });
-
-            modelBuilder.Entity("cuentasPorPagarApi.Entities.Usuario", b =>
-                {
-                    b.Property<int>("usuarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("usuarioId"), 1L, 1);
-
-                    b.Property<string>("Correo")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<string>("contrasenha")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
-                    b.HasKey("usuarioId");
-
-                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Factura", b =>
