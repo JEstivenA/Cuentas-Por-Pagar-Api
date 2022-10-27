@@ -11,8 +11,8 @@ using cuentasPorPagarApi.Context;
 namespace cuentasPorPagarApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221025233959_addTableUsersDb")]
-    partial class addTableUsersDb
+    [Migration("20221027163322_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,14 @@ namespace cuentasPorPagarApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"), 1L, 1);
 
+                    b.Property<int>("NoFactura")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProveedorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalFactura")
-                        .HasColumnType("int");
+                    b.Property<float>("TotalFactura")
+                        .HasColumnType("real");
 
                     b.HasKey("FacturaId");
 
@@ -68,11 +71,11 @@ namespace cuentasPorPagarApi.Migrations
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Proveedor", b =>
                 {
-                    b.Property<int>("IdProveedor")
+                    b.Property<int>("ProveedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProveedor"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"), 1L, 1);
 
                     b.Property<string>("Email")
                         .HasMaxLength(25)
@@ -85,7 +88,7 @@ namespace cuentasPorPagarApi.Migrations
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("IdProveedor");
+                    b.HasKey("ProveedorId");
 
                     b.ToTable("Proveedores");
                 });
@@ -113,11 +116,13 @@ namespace cuentasPorPagarApi.Migrations
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Factura", b =>
                 {
-                    b.HasOne("cuentasPorPagarApi.Entities.Proveedor", null)
+                    b.HasOne("cuentasPorPagarApi.Entities.Proveedor", "Proveedor")
                         .WithMany("Facturas")
                         .HasForeignKey("ProveedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Proveedor", b =>

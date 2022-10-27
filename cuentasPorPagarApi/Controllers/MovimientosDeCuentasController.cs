@@ -23,23 +23,27 @@ namespace cuentasPorPagarApi.Controllers
 
         // GET: api/MovimientosDeCuentas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovimientosDeCuentas>>> GetMovimientosDeCuentas()
+        public async Task<ActionResult<List<MovimientosDeCuentas>>> GetMovimientosDeCuentas()
         {
-            return await _context.MovimientosDeCuentas.ToListAsync();
+            var pagos = _context.MovimientosDeCuentas.Include(Factura => Factura.Factura);
+
+            return await pagos.ToListAsync();
         }
 
         // GET: api/MovimientosDeCuentas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MovimientosDeCuentas>> GetMovimientosDeCuentas(int id)
+        public async Task<ActionResult<List<MovimientosDeCuentas>>> GetMovimientosDeCuentas(int id)
         {
-            var movimientosDeCuentas = await _context.MovimientosDeCuentas.FindAsync(id);
+            var pago = _context.MovimientosDeCuentas
+              .Include(Factura => Factura.Factura)
+              .Where(Pago => Pago.PagoId == id);
 
-            if (movimientosDeCuentas == null)
+            if (pago == null)
             {
                 return NotFound();
             }
 
-            return movimientosDeCuentas;
+            return await pago.ToListAsync();
         }
 
         // PUT: api/MovimientosDeCuentas/5
@@ -47,7 +51,7 @@ namespace cuentasPorPagarApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovimientosDeCuentas(int id, MovimientosDeCuentas movimientosDeCuentas)
         {
-            if (id != movimientosDeCuentas.IdPago)
+            if (id != movimientosDeCuentas.PagoId)
             {
                 return BadRequest();
             }
@@ -81,7 +85,7 @@ namespace cuentasPorPagarApi.Controllers
             _context.MovimientosDeCuentas.Add(movimientosDeCuentas);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovimientosDeCuentas", new { id = movimientosDeCuentas.IdPago }, movimientosDeCuentas);
+            return CreatedAtAction("GetMovimientosDeCuentas", new { id = movimientosDeCuentas.PagoId }, movimientosDeCuentas);
         }
 
         // DELETE: api/MovimientosDeCuentas/5
@@ -102,7 +106,7 @@ namespace cuentasPorPagarApi.Controllers
 
         private bool MovimientosDeCuentasExists(int id)
         {
-            return _context.MovimientosDeCuentas.Any(e => e.IdPago == id);
+            return _context.MovimientosDeCuentas.Any(e => e.PagoId == id);
         }
     }
 }

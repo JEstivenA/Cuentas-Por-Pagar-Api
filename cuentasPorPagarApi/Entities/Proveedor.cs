@@ -5,7 +5,7 @@ namespace cuentasPorPagarApi.Entities
     public class Proveedor
     {
         [Key]
-        public int IdProveedor { get; set; }
+        public int ProveedorId { get; set; }
 
         [StringLength(50)]
         public string? ProveedorName { get; set; }

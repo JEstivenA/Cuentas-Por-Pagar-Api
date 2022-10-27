@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj": {}
+    "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj": {}
   },
   "projects": {
-    "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj": {
+    "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
+        "projectUniqueName": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
         "projectName": "cuentasPorPagarApi",
-        "projectPath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
+        "projectPath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
         "packagesPath": "C:\\Users\\estiv\\.nuget\\packages\\",
-        "outputPath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\obj\\",
+        "outputPath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -4,7 +4,7 @@
 
 namespace cuentasPorPagarApi.Migrations
 {
-    public partial class initialMigrationDB : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,7 @@ namespace cuentasPorPagarApi.Migrations
                 name: "Proveedores",
                 columns: table => new
                 {
-                    IdProveedor = table.Column<int>(type: "int", nullable: false)
+                    ProveedorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProveedorName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
@@ -35,7 +35,21 @@ namespace cuentasPorPagarApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Proveedores", x => x.IdProveedor);
+                    table.PrimaryKey("PK_Proveedores", x => x.ProveedorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    usuarioId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Correo = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
+                    contrasenha = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.usuarioId);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,9 +58,9 @@ namespace cuentasPorPagarApi.Migrations
                 {
                     FacturaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalFactura = table.Column<int>(type: "int", nullable: false),
-                    ProveedorId = table.Column<int>(type: "int", nullable: false),
-                    nameProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NoFactura = table.Column<int>(type: "int", nullable: false),
+                    TotalFactura = table.Column<float>(type: "real", nullable: false),
+                    ProveedorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,7 +69,7 @@ namespace cuentasPorPagarApi.Migrations
                         name: "FK_Facturas_Proveedores_ProveedorId",
                         column: x => x.ProveedorId,
                         principalTable: "Proveedores",
-                        principalColumn: "IdProveedor",
+                        principalColumn: "ProveedorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -72,6 +86,9 @@ namespace cuentasPorPagarApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "MovimientosDeCuentas");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Proveedores");

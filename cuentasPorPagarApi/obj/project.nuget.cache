@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Wy0xYCBycp0t43l7GdEx4LBe7E/RKZqaWw8JcA/2AvxPU8rbc5K0AVKw/Rn+ATyFxhoE7lN2t1LM1S1T9IBMGw==",
+  "dgSpecHash": "Y+TQR5ICiLNPrB4WpHDEPYMdJScfMUvsLnD0V6CgwTKy6DI9v3B7WzMIFaTguzPCfLNA8SU1yPkK0RRGwh/5oQ==",
   "success": true,
-  "projectFilePath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
+  "projectFilePath": "E:\\U\\8vo. Semestre\\Desarollo Web\\Proyecto Final\\cuentasPorPagarApi2\\Cuentas-Por-Pagar-Api\\cuentasPorPagarApi\\cuentasPorPagarApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\estiv\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\estiv\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

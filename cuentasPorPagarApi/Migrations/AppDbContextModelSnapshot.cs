@@ -47,33 +47,35 @@ namespace cuentasPorPagarApi.Migrations
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.MovimientosDeCuentas", b =>
                 {
-                    b.Property<int>("IdPago")
+                    b.Property<int>("PagoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPago"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PagoId"), 1L, 1);
 
-                    b.Property<int>("DeudaRestante")
-                        .HasColumnType("int");
+                    b.Property<string>("DescPago")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdFactura")
+                    b.Property<int>("FacturaId")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalPago")
                         .HasColumnType("int");
 
-                    b.HasKey("IdPago");
+                    b.HasKey("PagoId");
+
+                    b.HasIndex("FacturaId");
 
                     b.ToTable("MovimientosDeCuentas");
                 });
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Proveedor", b =>
                 {
-                    b.Property<int>("IdProveedor")
+                    b.Property<int>("ProveedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProveedor"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"), 1L, 1);
 
                     b.Property<string>("Email")
                         .HasMaxLength(25)
@@ -86,7 +88,7 @@ namespace cuentasPorPagarApi.Migrations
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("IdProveedor");
+                    b.HasKey("ProveedorId");
 
                     b.ToTable("Proveedores");
                 });
@@ -114,11 +116,29 @@ namespace cuentasPorPagarApi.Migrations
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Factura", b =>
                 {
-                    b.HasOne("cuentasPorPagarApi.Entities.Proveedor", null)
+                    b.HasOne("cuentasPorPagarApi.Entities.Proveedor", "Proveedor")
                         .WithMany("Facturas")
                         .HasForeignKey("ProveedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Proveedor");
+                });
+
+            modelBuilder.Entity("cuentasPorPagarApi.Entities.MovimientosDeCuentas", b =>
+                {
+                    b.HasOne("cuentasPorPagarApi.Entities.Factura", "Factura")
+                        .WithMany("Pagos")
+                        .HasForeignKey("FacturaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Factura");
+                });
+
+            modelBuilder.Entity("cuentasPorPagarApi.Entities.Factura", b =>
+                {
+                    b.Navigation("Pagos");
                 });
 
             modelBuilder.Entity("cuentasPorPagarApi.Entities.Proveedor", b =>

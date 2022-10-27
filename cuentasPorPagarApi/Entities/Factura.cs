@@ -11,6 +11,14 @@ namespace cuentasPorPagarApi.Entities
         public float TotalFactura { get; set; }
          
         public int ProveedorId { get; set; }
+        public Proveedor? Proveedor { get; set; }
+
+        public ICollection<MovimientosDeCuentas> Pagos { get; set; }
+
+        public Factura()
+        {
+            Pagos = new HashSet<MovimientosDeCuentas>();
+        }
 
     }
 }

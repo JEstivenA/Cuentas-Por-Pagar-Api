@@ -23,30 +23,36 @@ namespace cuentasPorPagarApi.Controllers
 
         // GET: api/Proveedors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Proveedor>>> GetProveedores()
+        public async Task<ActionResult<List<Proveedor>>> GetProveedores()
         {
-            return await _context.Proveedores.ToListAsync();
+            var proveedor = _context.Proveedores
+                .Include(Facturas => Facturas.Facturas);
+
+            return await proveedor.ToListAsync();
         }
 
         // GET: api/Proveedors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Proveedor>> GetProveedor(int id)
+        public async Task<ActionResult<List<Proveedor>>> GetProveedor(int id)
         {
-            var proveedor = await _context.Proveedores.FindAsync(id);
+
+            var proveedor = _context.Proveedores
+                .Include(Facturas => Facturas.Facturas)
+                .Where(Proveedor => Proveedor.ProveedorId == id);
 
             if (proveedor == null)
             {
                 return NotFound();
             }
 
-            return proveedor;
+            return await proveedor.ToListAsync();
         }
 
         // PUT: api/Proveedors/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProveedor(int id, Proveedor proveedor)
         {
-            if (id != proveedor.IdProveedor)
+            if (id != proveedor.ProveedorId)
             {
                 return BadRequest();
             }
@@ -100,7 +106,7 @@ namespace cuentasPorPagarApi.Controllers
 
         private bool ProveedorExists(int id)
         {
-            return _context.Proveedores.Any(e => e.IdProveedor == id);
+            return _context.Proveedores.Any(e => e.ProveedorId == id);
         }
     }
 }

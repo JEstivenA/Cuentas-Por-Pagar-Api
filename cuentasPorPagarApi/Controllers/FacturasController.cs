@@ -23,23 +23,28 @@ namespace cuentasPorPagarApi.Controllers
 
         // GET: api/Facturas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Factura>>> GetFacturas()
+        public async Task<ActionResult<List<Factura>>> GetFacturas()
         {
-            return await _context.Facturas.ToListAsync();
+            var facturas = _context.Facturas.Include(Proveedor => Proveedor.Proveedor);
+
+            return await facturas.ToListAsync();
         }
 
         // GET: api/Facturas/5
         [HttpGet("editar/{id}")]
-        public async Task<ActionResult<Factura>> GetFactura(int id)
+        public async Task<ActionResult<List<Factura>>> GetFactura(int id)
         {
-            var factura = await _context.Facturas.FindAsync(id);
+            var factura = _context.Facturas
+               .Include(Proveedor => Proveedor.Proveedor)
+               .Include(Pagos => Pagos.Pagos)
+               .Where(Factura => Factura.FacturaId == id);
 
             if (factura == null)
             {
                 return NotFound();
             }
 
-            return factura;
+            return await factura.ToListAsync();
         }
 
         // PUT: api/Facturas/5

@@ -5,9 +5,10 @@ namespace cuentasPorPagarApi.Entities
     public class MovimientosDeCuentas
     {
         [Key]
-        public int IdPago { get; set; }
+        public int PagoId { get; set; }
+        public String? DescPago { get; set; }
         public int TotalPago { get; set; }
-        public int DeudaRestante { get; set; }
-        public int IdFactura { get; set; }
+        public int FacturaId { get; set; }
+        public Factura? Factura { get; set; }
     }
 }
