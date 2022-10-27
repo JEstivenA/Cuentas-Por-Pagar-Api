@@ -29,7 +29,7 @@ namespace cuentasPorPagarApi.Controllers
         }
 
         // GET: api/Facturas/5
-        [HttpGet("{id}")]
+        [HttpGet("editar/{id}")]
         public async Task<ActionResult<Factura>> GetFactura(int id)
         {
             var factura = await _context.Facturas.FindAsync(id);
